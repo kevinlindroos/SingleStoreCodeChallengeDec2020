@@ -9,8 +9,8 @@ AS
 DECLARE tags ARRAY(JSON);
 BEGIN
 
-	FOR row IN COLLECT(batch) LOOP
-    tags = JSON_TO_ARRAY(row.pTags);	
+  FOR row IN COLLECT(batch) LOOP
+    tags = JSON_TO_ARRAY(row.pTags);
     FOR tag IN tags LOOP
       INSERT CustomerTag (CustomerID, Account, Tag) 
       VALUES (row.pCustomerID, row.pAccount, REPLACE(tag, '"', ''));
