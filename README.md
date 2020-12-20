@@ -14,11 +14,11 @@ Solution2.sql will be posted when I'm finished with a more elegant solution to t
 ```sql
 CREATE TABLE Customers (CustomerID VARCHAR(25), Account VARCHAR(25), Tags JSON NOT NULL);
 
-LOAD DATA LOCAL INFILE '/file1.txt'
+CREATE OR REPLACE PIPELINE LoadFiles AS
+LOAD DATA FS '/home/memsql/sampledata/*'
 INTO TABLE Customers 
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n';
-
 ```
 
 ...then output the results with a single query. I'm working on this.
