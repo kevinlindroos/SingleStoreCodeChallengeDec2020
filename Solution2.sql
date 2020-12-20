@@ -1,0 +1,27 @@
+CREATE DATABASE SingleStoreChallengeDec2020;
+USE SingleStoreChallengeDec2020;
+
+CREATE TABLE Customers (CustomerID VARCHAR(25), Account VARCHAR(25), Tags JSON NOT NULL);
+
+LOAD DATA LOCAL INFILE 'C:/file1.txt'
+INTO TABLE Customers 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+LOAD DATA LOCAL INFILE 'C:/file2.txt'
+INTO TABLE Customers 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+LOAD DATA LOCAL INFILE 'C:/file3.txt'
+INTO TABLE Customers 
+FIELDS TERMINATED BY '\t'
+LINES TERMINATED BY '\n';
+
+-- Incomplete. More to follow...
+WITH CTE AS (
+  SELECT TO_JSON(Customers.*) AS jsonData
+  FROM Customers
+)
+SELECT *
+FROM CTE
