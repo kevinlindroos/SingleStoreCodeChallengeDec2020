@@ -3,20 +3,13 @@ USE SingleStoreChallengeDec2020;
 
 CREATE TABLE Customers (CustomerID VARCHAR(25), Account VARCHAR(25), Tags JSON NOT NULL);
 
-LOAD DATA LOCAL INFILE 'C:/file1.txt'
+CREATE OR REPLACE PIPELINE LoadFiles AS
+LOAD DATA FS '/home/memsql/sampledata/*'
 INTO TABLE Customers 
 FIELDS TERMINATED BY '\t'
 LINES TERMINATED BY '\n';
 
-LOAD DATA LOCAL INFILE 'C:/file2.txt'
-INTO TABLE Customers 
-FIELDS TERMINATED BY '\t'
-LINES TERMINATED BY '\n';
-
-LOAD DATA LOCAL INFILE 'C:/file3.txt'
-INTO TABLE Customers 
-FIELDS TERMINATED BY '\t'
-LINES TERMINATED BY '\n';
+START PIPELINE LoadFiles FOREGROUND;
 
 -- Incomplete. More to follow...
 WITH CTE AS (
