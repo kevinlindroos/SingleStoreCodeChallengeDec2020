@@ -17,6 +17,7 @@ WITH CTE AS (
   FROM Customers
   JOIN TABLE(JSON_TO_ARRAY(Customers.Tags))
   GROUP BY tag
+  ORDER BY COUNT(CustomerID) DESC
 )
 SELECT JSON_AGG(CTE.*)
 FROM CTE
